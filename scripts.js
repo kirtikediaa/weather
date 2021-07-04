@@ -4,6 +4,7 @@ const error = document.querySelector(".error-msg");
 const toggleSwitch = document.querySelector(".switch");
 const temperature=document.querySelector(".degree");
 const feelsLike=document.querySelector(".feels-like");
+const input = document.querySelector('.inputCity');
 
 form.addEventListener('submit', handleSubmit);
 submitBtn.addEventListener('click', handleSubmit);
@@ -33,17 +34,19 @@ async function getWeatherData(location) {
 function throwErrorMsg() {
   error.style.display = 'block';
   alert("Invalid location");
-  document.querySelector(".weather-details info").innerHTML="&nbsp; ";
-  document.querySelector(".weather-display").innerHTML=" &nbsp;";
-  form.reset();
-  document.querySelector('.inputCity').innerHTML="&nbsp;";
+  document.getElementById('wd').innerHTML = "";
+  document.getElementById('wdi').innerHTML = "";
+  form.reset();  
+  document.getElementById('inp').value =" ";
+  reset();
+
 
 }
 
 function processData(weatherData) {
   
   const myData = {
-    condition: weatherData.weather.description,
+    // condition: weatherData.weather.description,
     
     feelsLike: weatherData.main.feels_like,
     currentTemp: weatherData.main.temp,   
@@ -52,12 +55,13 @@ function processData(weatherData) {
     humidity: weatherData.main.humidity,
     location: weatherData.name.toUpperCase()       
   };
+  
 
    return myData;
 }
 
 function displayData(newData) {
-  document.querySelector(".condition").textContent = newData.condition;
+    // document.getElementById('cd').innerHTML = newData.condition;
   document.querySelector(
     '.location'
   ).textContent = `${newData.location}`;
@@ -70,28 +74,32 @@ function displayData(newData) {
 
   let temp = newData.currentTemp;
 let tempFeel = newData.feelsLike
-console.log(temp);
 
 toggleSwitch.addEventListener('change', () => {
     if (toggleSwitch.checked) {
+        console.log("toggle"+toggleSwitch.checked);
       setTimeout(() => {
         temp = toFahrenheit(temp);
         tempFeel = toFahrenheit(tempFeel);
-        console.log(tempFeel);
-        temperature.textContent= `${temp + '&degF'}`;
-        document.querySelector( '.feels-like').textContent= `${'Feels like: '}${tempFeel + '&deg'}`;
+        console.log("TEMPFEEL"+tempFeel);
+        document.getElementById('deg').innerHTML= `${temp + '&degF'}`;
+        document.getElementById('fl').innerHTML= `${'Feels like: '}${tempFeel + '&degF'}`;
       }, 150);
     } else {
       setTimeout(() => {
         temp = toCelsius(temp);
         tempFeel = toCelsius(tempFeel);
-        document.querySelector( '.degree').textContent = `${temp + '&degC'}`;
-        document.querySelector( '.feels-like').textContent = `${'Feels like: '}${tempFeel + '&deg'}`;
+        console.log("temp"+temp);
+        console.log(tempFeel);
+        document.getElementById('deg').innerHTML = `${temp + '&degC'}`;
+        document.getElementById('fl').innerHTML = `${'Feels like: '}${tempFeel + '&degC'}`;
       }, 150);
+
     }
   });
 
 }
+
 function kelvinToCelcius(temp) {
     temp = parseFloat(temp);
     temp = Math.round((temp = temp - 273.15));
@@ -112,13 +120,14 @@ function kelvinToCelcius(temp) {
     temp = Math.round((temp = (temp - 32) * (5 / 9)));
     return temp;
   }
+
   
 
 function reset() {
   form.reset();
 }
 function fetchWeather() {
-    const input = document.querySelector('.inputCity');
+   
     const userLocation = input.value;
     getWeatherData(userLocation);
   }

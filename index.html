@@ -8,26 +8,26 @@
       <div class="main-container">
           <h1 class="title">Weather Report</h1>
           <form class="form">
-              <input class="inputCity" placeholder="Enter location">
+              <input class="inputCity" id="inp" placeholder="Enter location">
               
               <button class="submit-btn" id="searchBtn" type="submit"> Search</button>
                <span class="error-msg">No matching location found</span>
             </form>
-            <div class="weather-display">
+            <div class="weather-display" id="wd">
               <div class="general">
-                <p class="condition">Weather Condition:</p>
+                <!-- <p class="condition" id="cd">Weather Condition:</p> -->
                 <h1 class="location">CITY</h1>
-                <span class="degrees">TEMPERATURE</span>
+                <span class="degrees" id="deg">TEMPERATURE</span>
               </div>
             </div>
-              <div class="weather-details info">
-                <p class="feels-like">FEELS LIKE:</p>
+              <div class="weather-details info" id="wdi">
+                <p class="feels-like" id="fl">FEELS LIKE:</p>
                 <p class="wind">WIND:</p>
                 <p class="humidity">HUMIDITY: </p>
               </div>
        
           <label class="switch">
-            <input type="checkbox" class="switch" />
+            <input type="checkbox" switch />
             <span class="slider round">
               <div>
                 <span>C</span>
