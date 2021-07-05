@@ -22,23 +22,37 @@ async function getWeatherData(location) {
   );
   if (response.status === 404) {
     throwErrorMsg();
+    reset();
+    clear();
+    // submitBtn.addEventListener('click', reloadDIV);
+    setTimeout(reloadDIV, 3000);
+    console.log("1");
+    
+     
   } else {
     error.style.display = 'none';
     const weatherData = await response.json();
     const newData = processData(weatherData);
     displayData(newData);
     reset();
+    
   }
+}
+function reloadDIV () {
+  location.reload();
 }
 
 function throwErrorMsg() {
   error.style.display = 'block';
   alert("Invalid location");
-  document.getElementById('wd').innerHTML = "";
+  
+  
+}
+function clear(){
+ document.getElementById('wd').innerHTML = "";
   document.getElementById('wdi').innerHTML = "";
-  form.reset();  
+
   document.getElementById('inp').value =" ";
-  reset();
 
 
 }
