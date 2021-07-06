@@ -79,15 +79,17 @@ function displayData(newData) {
   document.querySelector(
     '.location'
   ).textContent = `${newData.location}`;
-  document.querySelector('.degrees').textContent = newData.currentTemp+' F';
-  feelsLike.textContent = `FEELS LIKE: ${newData.feelsLike} F`;
+  document.querySelector('.degrees').textContent = newData.currentTemp+' K';
+  feelsLike.textContent = `FEELS LIKE: ${newData.feelsLike} K`;
   document.querySelector('.wind').textContent = `WIND: ${newData.wind} MPH`;
   document.querySelector(
     '.humidity'
   ).textContent = `HUMIDITY: ${newData.humidity}`;
 
   let temp = newData.currentTemp;
-let tempFeel = newData.feelsLike
+  temp=kelvinToFahrenheit(temp);
+let tempFeel = newData.feelsLike;
+tempFeel=kelvinToFahrenheit(tempFeel);
 
 toggleSwitch.addEventListener('change', () => {
     if (toggleSwitch.checked) {
@@ -136,8 +138,7 @@ function kelvinToCelcius(temp) {
     temp = Math.round((temp = (temp - 32) * (5 / 9)));
     return temp;
   }
-
-  
+ 
 
 function reset() {
   form.reset();
