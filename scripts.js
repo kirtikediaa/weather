@@ -1,7 +1,7 @@
 const form = document.querySelector(".form");
 const submitBtn = document.querySelector(".submit-btn");
 const error = document.querySelector(".error-msg");
-const toggleSwitch = document.querySelector(".switch");
+const toggleSwitch =  document.getElementById('switch');
 const temperature=document.querySelector(".degree");
 const feelsLike=document.querySelector(".feels-like");
 const input = document.querySelector('.inputCity');
@@ -79,8 +79,8 @@ function displayData(newData) {
   document.querySelector(
     '.location'
   ).textContent = `${newData.location}`;
-  document.querySelector('.degrees').textContent = newData.currentTemp;
-  feelsLike.textContent = `FEELS LIKE: ${newData.feelsLike}`;
+  document.querySelector('.degrees').textContent = newData.currentTemp+' F';
+  feelsLike.textContent = `FEELS LIKE: ${newData.feelsLike} F`;
   document.querySelector('.wind').textContent = `WIND: ${newData.wind} MPH`;
   document.querySelector(
     '.humidity'
@@ -92,22 +92,24 @@ let tempFeel = newData.feelsLike
 toggleSwitch.addEventListener('change', () => {
     if (toggleSwitch.checked) {
         console.log("toggle"+toggleSwitch.checked);
-      setTimeout(() => {
-        temp = toFahrenheit(temp);
-        tempFeel = toFahrenheit(tempFeel);
-        console.log("TEMPFEEL"+tempFeel);
-        document.getElementById('deg').innerHTML= `${temp + '&degF'}`;
-        document.getElementById('fl').innerHTML= `${'Feels like: '}${tempFeel + '&degF'}`;
-      }, 150);
+        setTimeout(() => {
+            temp = toCelsius(temp);
+            tempFeel = toCelsius(tempFeel);
+            console.log("temp"+temp);
+            console.log(tempFeel);
+            document.getElementById('deg').innerHTML = `${temp + '&degC'}`;
+            document.getElementById('fl').innerHTML = `${'Feels like: '}${tempFeel + '&degC'}`;
+          }, 150);
+      
     } else {
-      setTimeout(() => {
-        temp = toCelsius(temp);
-        tempFeel = toCelsius(tempFeel);
-        console.log("temp"+temp);
-        console.log(tempFeel);
-        document.getElementById('deg').innerHTML = `${temp + '&degC'}`;
-        document.getElementById('fl').innerHTML = `${'Feels like: '}${tempFeel + '&degC'}`;
-      }, 150);
+
+        setTimeout(() => {
+            temp = toFahrenheit(temp);
+            tempFeel = toFahrenheit(tempFeel);
+            console.log("TEMPFEEL"+tempFeel);
+            document.getElementById('deg').innerHTML= `${temp + '&degF'}`;
+            document.getElementById('fl').innerHTML= `${'Feels like: '}${tempFeel + '&degF'}`;
+          }, 150);
 
     }
   });
