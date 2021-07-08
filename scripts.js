@@ -1,7 +1,7 @@
 const form = document.querySelector(".form");
 const submitBtn = document.querySelector(".submit-btn");
 const error = document.querySelector(".error-msg");
-const toggleSwitch =  document.getElementById('switch');
+const toggleSwitch =document.getElementById('switch');
 const temperature=document.querySelector(".degree");
 const feelsLike=document.querySelector(".feels-like");
 const input = document.querySelector('.inputCity');
@@ -15,7 +15,7 @@ function handleSubmit(e) {
 }
 async function getWeatherData(location) {
   const response = await fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=e43b300740b05e082104769e9a56d923`,
+    `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=e43b300740b05e082104769e9a56d923`,
     {
       mode: 'cors',
     }
@@ -24,10 +24,9 @@ async function getWeatherData(location) {
     throwErrorMsg();
     reset();
     clear();
-    // submitBtn.addEventListener('click', reloadDIV);
+   
     setTimeout(reloadDIV, 3000);
-    console.log("1");
-    
+       
      
   } else {
     error.style.display = 'none';
@@ -44,7 +43,7 @@ function reloadDIV () {
 
 function throwErrorMsg() {
   error.style.display = 'block';
-  alert("Invalid location");
+//   alert("Invalid location");
   
   
 }
